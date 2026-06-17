@@ -1,53 +1,72 @@
-# Production-Grade Document Intelligence System using RAG
+# INSIGHTDOCS.AI
 
-## Overview
+A document intelligence application that allows users to upload PDF files, ask questions in natural language, and generate context-aware answers using Retrieval Augmented Generation (RAG) and local Large Language Models.
 
-Built an end-to-end Retrieval Augmented Generation (RAG) application that enables semantic document retrieval and context-aware question answering over unstructured PDF documents.
+## What this project does
 
-The system allows users to upload PDF files and ask natural language questions, generating accurate answers based on document content using local Large Language Models.
+This system processes unstructured PDF documents and converts them into searchable semantic embeddings.
+When a user asks a question, relevant document chunks are retrieved from a vector database and passed to a local LLM to generate an answer based only on document context.
 
----
+## Core Workflow
 
-## Architecture
+PDF Upload
+Text Extraction
+Text Chunking
+Embedding Generation
+Vector Similarity Search
+Context Retrieval
+LLM Response Generation
 
-PDF Upload  
-→ PDF Parsing  
-→ Text Chunking  
-→ Embedding Generation  
-→ Vector Database Storage  
-→ Semantic Retrieval  
-→ Local LLM Inference  
-→ Context-Aware Answer Generation
+## Technologies Used
 
----
+* Python
+* FastAPI
+* Streamlit
+* LangChain
+* ChromaDB
+* Ollama
+* HuggingFace Embeddings
+* Sentence Transformers
+* Docker
 
-## Tech Stack
+## Key Functionalities
 
-- Python
-- FastAPI
-- Streamlit
-- LangChain
-- Ollama
-- ChromaDB
-- HuggingFace Embeddings
-- Sentence Transformers
+* Upload and process PDF documents
+* Semantic document search using embeddings
+* Context-aware question answering
+* Document summarization
+* Local LLM inference using Llama3
+* Dockerized backend deployment
 
----
+## Running the Project
 
-## Features
-
-- Upload PDF documents
-- Semantic document retrieval
-- Question answering using local LLM
-- Vector search over document chunks
-- FastAPI backend architecture
-- Streamlit interactive frontend
-
----
-
-## Run Project
-
-Backend
+Start backend
 
 ```bash
 python -m uvicorn api:app --reload
+```
+
+Start frontend
+
+```bash
+streamlit run app.py
+```
+
+Docker
+
+```bash
+docker build -t insightdocs .
+docker run -p 8000:8000 insightdocs
+```
+
+## Project Structure
+
+app.py → Streamlit frontend
+api.py → FastAPI backend
+ingest.py → PDF ingestion pipeline
+rag_pipeline.py → Retrieval + LLM pipeline
+Dockerfile → Containerization setup
+
+---
+
+Built as an end-to-end document retrieval and question answering system using RAG architecture.
