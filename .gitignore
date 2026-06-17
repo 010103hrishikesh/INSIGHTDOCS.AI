@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+db/
+vectorstore/
+vectorstore_new/
+data/uploaded.pdf
