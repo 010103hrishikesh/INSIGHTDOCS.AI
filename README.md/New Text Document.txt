@@ -1,0 +1,53 @@
+# Production-Grade Document Intelligence System using RAG
+
+## Overview
+
+Built an end-to-end Retrieval Augmented Generation (RAG) application that enables semantic document retrieval and context-aware question answering over unstructured PDF documents.
+
+The system allows users to upload PDF files and ask natural language questions, generating accurate answers based on document content using local Large Language Models.
+
+---
+
+## Architecture
+
+PDF Upload  
+→ PDF Parsing  
+→ Text Chunking  
+→ Embedding Generation  
+→ Vector Database Storage  
+→ Semantic Retrieval  
+→ Local LLM Inference  
+→ Context-Aware Answer Generation
+
+---
+
+## Tech Stack
+
+- Python
+- FastAPI
+- Streamlit
+- LangChain
+- Ollama
+- ChromaDB
+- HuggingFace Embeddings
+- Sentence Transformers
+
+---
+
+## Features
+
+- Upload PDF documents
+- Semantic document retrieval
+- Question answering using local LLM
+- Vector search over document chunks
+- FastAPI backend architecture
+- Streamlit interactive frontend
+
+---
+
+## Run Project
+
+Backend
+
+```bash
+python -m uvicorn api:app --reload
