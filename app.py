@@ -1,26 +1,53 @@
 import streamlit as st
 import requests
+import os
 
-# ---------- PAGE CONFIG ----------
+# PAGE CONFIG
 st.set_page_config(
-    page_title="INSIGHTDOCS AI",
+    page_title="INSIGHTDOCS.AI",
     layout="centered"
 )
 
-# ---------- HEADER ----------
+# CSS
+st.markdown("""
+<style>
+.title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.subtitle {
+    text-align: center;
+    color: gray;
+    font-size: 17px;
+    margin-bottom: 40px;
+}
+
+.response-box {
+    padding: 20px;
+    background-color: #F8F9FA;
+    border-radius: 10px;
+    border: 1px solid #DDDDDD;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# HEADER
 st.markdown(
     """
-    <h1 style='text-align: center;'>INSIGHTDOCS.AI</h1>
-    <p style='text-align: center; color: grey;'>
-    Analyze, summarize and interact with documents intelligently
-    </p>
+    <div class="title">INSIGHTDOCS.AI</div>
+    <div class="subtitle">
+    Upload documents and interact with them using intelligent AI retrieval
+    </div>
     """,
     unsafe_allow_html=True
 )
 
 st.divider()
 
-# ---------- FILE UPLOAD ----------
+# FILE UPLOAD
 st.subheader("Upload Document")
 
 uploaded_file = st.file_uploader(
@@ -30,58 +57,62 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
 
+    os.makedirs("data", exist_ok=True)
+
     with open("data/uploaded.pdf", "wb") as f:
         f.write(uploaded_file.getbuffer())
 
-    try:
-        with st.spinner("Processing document..."):
+    with st.spinner("Processing document..."):
 
-            response = requests.post(
-                "http://127.0.0.1:8000/upload"
-            )
+        response = requests.post(
+            "http://127.0.0.1:8000/upload"
+        )
 
-            if response.status_code == 200:
-                st.success("Document ready.")
-            else:
-                st.error("Unable to process document.")
+        if response.status_code == 200:
+            st.success("Document ready")
 
-    except Exception as e:
-        st.error(f"Upload Error: {e}")
+        else:
+            st.error("Unable to process document")
 
 st.divider()
 
-# ---------- QUESTION INPUT ----------
+# QUESTION INPUT
 st.subheader("Ask Questions")
 
 question = st.text_input(
     "",
-    placeholder="What would you like to know about the document?"
+    placeholder="Ask anything about your document..."
 )
 
-# ---------- BUTTON ----------
-if st.button("Analyze", use_container_width=True):
+if st.button("Generate Response", use_container_width=True):
 
     if question == "":
-        st.warning("Enter a question first.")
+        st.warning("Enter a question first")
 
     else:
-        try:
-            with st.spinner("Generating response..."):
+        with st.spinner("Generating response..."):
 
-                response = requests.post(
-                    "http://127.0.0.1:8000/ask",
-                    json={"question": question}
-                )
+            response = requests.post(
+                "http://127.0.0.1:8000/ask",
+                json={"question": question}
+            )
 
-                result = response.json()
+            result = response.json()
 
-                st.divider()
-                st.subheader("Response")
+            st.divider()
+            st.subheader("AI Response")
 
-                if "answer" in result:
-                    st.write(result["answer"])
-                else:
-                    st.write(result)
+            st.markdown(
+                '<div class="response-box">',
+                unsafe_allow_html=True
+            )
 
-        except Exception as e:
-            st.error(f"Question Error: {e}")
+            if "answer" in result:
+                st.write(result["answer"])
+            else:
+                st.write(result)
+
+            st.markdown(
+                '</div>',
+                unsafe_allow_html=True
+            )
