@@ -1,32 +1,27 @@
 # INSIGHTDOCS.AI
 
-An end-to-end intelligent document analysis system built to process unstructured PDF documents, perform semantic retrieval, and generate context-aware responses using Retrieval Augmented Generation (RAG) and local Large Language Models.
+AI-powered document intelligence system built using Retrieval Augmented Generation (RAG) to enable semantic document search and context-aware question answering over PDF documents.
 
----
+## Features
 
-## Overview
+* Upload PDF documents
+* Semantic document retrieval using vector search
+* Context-aware question answering
+* Local document understanding using embeddings
+* FastAPI backend architecture
+* Streamlit interactive frontend
+* Groq LLM API integration for fast inference
 
-INSIGHTDOCS.AI enables users to upload PDF documents and interact with them through natural language queries.
+## Architecture
 
-The system extracts document content, converts textual data into vector embeddings, retrieves semantically relevant context using vector similarity search, and generates accurate responses using a locally hosted Large Language Model.
-
-Designed as a production-style document intelligence pipeline, the project demonstrates practical implementation of modern LLM infrastructure and retrieval systems.
-
----
-
-## System Pipeline
-
-* PDF Document Upload
-* Document Parsing and Text Extraction
-* Intelligent Text Chunking
-* Embedding Generation
-* Vector Database Storage
-* Semantic Context Retrieval
-* Retrieval Augmented Generation (RAG)
-* Local LLM Inference
-* Context-Aware Response Generation
-
----
+PDF Upload
+→ PDF Parsing
+→ Text Chunking
+→ Embedding Generation
+→ ChromaDB Vector Storage
+→ Semantic Retrieval
+→ Groq LLM Inference
+→ AI Response Generation
 
 ## Tech Stack
 
@@ -36,69 +31,22 @@ Designed as a production-style document intelligence pipeline, the project demon
 * LangChain
 * ChromaDB
 * HuggingFace Embeddings
-* Ollama (Local LLM Inference)
+* Groq API
 * Docker
 
----
+## Example Queries
 
-## Core Features
+* Summarize this document
+* What technologies are discussed in this paper?
+* Explain the architecture proposed in this paper
+* What problem does this research solve?
 
-* Intelligent PDF Document Processing
-* Semantic Search over Unstructured Documents
-* AI-Powered Context-Aware Question Answering
-* Document Understanding and Summarization
-* Retrieval Augmented Generation Pipeline
-* Local LLM Deployment using Ollama
-* Dockerized Backend Architecture
+## Run Project
 
----
+Backend
 
-## Application Preview
-
-### User Interface
-
-![Homepage](screenshots/homepage.png)
-
-### Document Upload & Processing
-
-![Upload](screenshots/upload-success.png)
-
-### AI Question Answering
-
-![Demo](screenshots/qa-demo.png)
-
----
-
-## Run Application
-
-### Backend
-
-```bash
 python -m uvicorn api:app --reload
-```
 
-### Frontend
+Frontend
 
-```bash
 streamlit run app.py
-```
-
-### Docker Deployment
-
-```bash
-docker build -t insightdocs .
-docker run -p 8000:8000 insightdocs
-```
-
----
-
-## Project Focus
-
-This project demonstrates practical implementation of:
-
-* Retrieval Augmented Generation (RAG)
-* Semantic Search Systems
-* Vector Database Architecture
-* Large Language Model Integration
-* Production-Oriented AI Backend Development
-* End-to-End Document Intelligence Systems
